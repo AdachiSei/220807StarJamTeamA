@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPattern4 : MonoBehaviour
+public class EnemyPattern4 : MonoBehaviour,IDamage
 {
     private Vector3 _startPosition, _goalPosition;
 
@@ -58,5 +58,7 @@ public class EnemyPattern4 : MonoBehaviour
         Quaternion y = this.transform.rotation;
         this.transform.rotation = y * Move_y;
     }
+
+    public int IDamege() => _attack;
 }
 

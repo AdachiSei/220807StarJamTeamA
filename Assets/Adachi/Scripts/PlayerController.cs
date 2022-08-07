@@ -37,21 +37,25 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out Rigidbody t1))
+        if(collision.gameObject.TryGetComponent(out IDamage idamage))
         {
             Debug.Log("敵に触れた");
+            SoundManager.Instance.PlaySFX(SFXType.Enemy);
             //ここで敵が持ってる関数を呼び出す
-
+            _life -= idamage.IDamege();
 
             if(_life < 0)
             {
+                SoundManager.Instance.PlaySFX(SFXType.Death);
                 GameOver();
             }
         }
         else if(collision.gameObject.TryGetComponent(out Rigidbody t2))
         {
             Debug.Log("アイテムに触れた");
+            SoundManager.Instance.PlaySFX(SFXType.Item);
             //アイテムが持ってる関数を呼び出す
+
         }
         else if(collision.gameObject.tag == DEATH_ZONE_TAG)
         {
@@ -69,6 +73,7 @@ public class PlayerController : MonoBehaviour
     void GameOver()
     {
         Debug.Log("ゲームオーバー");
+        SoundManager.Instance.PlayBGM(BGMType.Result);
         ResultUIManager.Instance.ResultSetActive(true);
         Destroy(gameObject);
     }
