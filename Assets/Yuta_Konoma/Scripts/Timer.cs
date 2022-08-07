@@ -28,6 +28,6 @@ public class Timer : MonoBehaviour
             _minute += 1;
             _seconds = 0;
         }
-        _timeText.text = _minute.ToString("Time:0") + ":" + _seconds.ToString("f2");
+        _timeText.text = _minute.ToString("Time0") + ":" + _seconds.ToString("f2");
     }
 }

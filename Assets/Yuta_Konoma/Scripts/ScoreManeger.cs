@@ -11,10 +11,17 @@ public class ScoreManeger : SingletonMonoBehaviour<ScoreManeger>
     public float _score;
 
     [SerializeField] TextMeshProUGUI _scoreText;
+
     private void Start()
     {
         _scoreText.text = "Score:" + _score;
     }
+
+    public void ScoreUp()
+    {
+        _score += 50;
+    }
+
     public void GameOver()
     {
         _score = _score * Timer._time;
