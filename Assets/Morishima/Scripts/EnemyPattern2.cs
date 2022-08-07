@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPattern2 : MonoBehaviour
+public class EnemyPattern2 : MonoBehaviour,IDamage
 {
     private Vector3 _enemypattern2;
 
@@ -33,4 +33,6 @@ public class EnemyPattern2 : MonoBehaviour
         Quaternion y = this.transform.rotation;
         this.transform.rotation = y * Move_y;
     }
+
+    public int IDamege() => _attack;
 }
