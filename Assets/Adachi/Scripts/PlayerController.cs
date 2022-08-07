@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     int _life;
 
     Rigidbody _rb;
+    const string DEATH_ZONE_TAG = "Finish";
 
     void Awake()
     {
@@ -23,11 +24,15 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("プレイヤーのRigitbodyを参照できた");
         }
+        else
+        {
+            _rb = gameObject.AddComponent<Rigidbody>().GetComponent<Rigidbody>();
+        }
     }
 
     void Update()
     {
-        OnMove();
+        OnMove();     
     }
 
     void OnCollisionEnter(Collision collision)
@@ -36,11 +41,21 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("敵に触れた");
             //ここで敵が持ってる関数を呼び出す
+
+
+            if(_life < 0)
+            {
+                GameOver();
+            }
         }
         else if(collision.gameObject.TryGetComponent(out Rigidbody t2))
         {
             Debug.Log("アイテムに触れた");
             //アイテムが持ってる関数を呼び出す
+        }
+        else if(collision.gameObject.tag == DEATH_ZONE_TAG)
+        {
+            GameOver();
         }
     }
 
@@ -49,5 +64,12 @@ public class PlayerController : MonoBehaviour
         var h = Input.GetAxisRaw("Horizontal");
         var v = Input.GetAxisRaw("Vertical");
         _rb.AddForce(h, _rb.velocity.y, v);
+    }
+
+    void GameOver()
+    {
+        Debug.Log("ゲームオーバー");
+        ResultUIManager.Instance.ResultSetActive(true);
+        Destroy(gameObject);
     }
 }
