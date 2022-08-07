@@ -50,12 +50,12 @@ public class PlayerController : MonoBehaviour
                 GameOver();
             }
         }
-        else if(collision.gameObject.TryGetComponent(out Rigidbody t2))
+        else if(collision.gameObject.TryGetComponent(out ScoreItem scoreItem))
         {
             Debug.Log("アイテムに触れた");
             SoundManager.Instance.PlaySFX(SFXType.Item);
             //アイテムが持ってる関数を呼び出す
-
+            scoreItem.Use();
         }
         else if(collision.gameObject.tag == DEATH_ZONE_TAG)
         {

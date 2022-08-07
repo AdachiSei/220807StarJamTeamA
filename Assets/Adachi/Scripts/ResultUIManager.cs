@@ -22,7 +22,7 @@ public class ResultUIManager : SingletonMonoBehaviour<ResultUIManager>
     }
 
     /// <summary>テキストを変更(時間, スコア)</summary>
-    public void ChangeText(int time,int score)
+    public void ChangeText(float time,float score)
     {
         _scoreUIs.FirstOrDefault(x => x.ScoreType == ScoreType.Timer).ChangeText(time);
         _scoreUIs.FirstOrDefault(x => x.ScoreType == ScoreType.Score).ChangeText(score);
@@ -50,7 +50,7 @@ public class ResultUIManager : SingletonMonoBehaviour<ResultUIManager>
         [Tooltip("テキスト")]
         Text _text;
 
-        public void ChangeText(int score)
+        public void ChangeText(float score)
         {
             _text.text = _name + "  " +score.ToString();
         }
