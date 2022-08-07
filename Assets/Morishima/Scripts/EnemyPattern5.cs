@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPattern4 : MonoBehaviour
+public class EnemyPattern5 : MonoBehaviour
 {
     private Vector3 _startPosition, _goalPosition;
 
@@ -14,9 +14,9 @@ public class EnemyPattern4 : MonoBehaviour
     void Start()
     {
         //スタート位置
-        _startPosition = new Vector3(20, 0.75f, 0);
+        _startPosition = new Vector3(-10, 0.75f, -15);
         //折り返し位置
-        _goalPosition = new Vector3(-20, 0.75f, 0);
+        _goalPosition = new Vector3(-10, 0.75f, 20);
 
         _attack = 1;
     }
@@ -32,23 +32,15 @@ public class EnemyPattern4 : MonoBehaviour
         //移動速度
         float Speed = 0.03f;
         Transform myTransform = this.transform;
-        
+
         //座標を取得
         Vector3 pos = myTransform.position;
 
         //移動処理
-        pos.x -= Speed;
+        pos.z += Speed;
         myTransform.position = pos;
 
-        if (pos.x <= -20)
-        {
-            transform.position = new Vector3(20, 0.75f, -10);
-        }
-        if (pos.x <= -20 && pos.z <= -10)
-        {
-            transform.position = new Vector3(20, 0.75f, 10);
-        }
-        if (pos.x <= -20 && pos.z >= 10)
+        if (pos.z >= 20 && pos.x <= -10)
         {
             transform.position = _startPosition;
         }
